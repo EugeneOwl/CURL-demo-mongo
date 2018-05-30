@@ -1,138 +1,90 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Document;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+
 /**
- * @MongoDB\Document
+ * @ODM\Document(collection="users")
  */
 class User
 {
     /**
-     * @MongoDB\Id
+     * @ODM\Id
      */
-    protected $id;
+    private $id;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ODM\Field(type="string")
      */
-    protected $firstname;
+    private $username;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ODM\Field(type="string")
      */
-    protected $lastname;
+    private $password;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ODM\Field(type="string")
      */
-    protected $email;
+    private $plainPassword;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ODM\ReferenceOne(
+     *     targetDocument="City"
+     * )
      */
-    protected $password;
+    private $city;
 
-    /**
-     * @MongoDB\Field(type="date")
-     */
-    protected $create_date;
-
-    /**
-     * @return mixed
-     */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFirstname()
+    public function getUsername(): ?string
     {
-        return $this->firstname;
+        return $this->username;
     }
 
-    /**
-     * @param mixed $firstname
-     */
-    public function setFirstname($firstname): void
+    public function setUsername(string $username): void
     {
-        $this->firstname = $firstname;
+        $this->username = $username;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLastname()
-    {
-        return $this->lastname;
-    }
-
-    /**
-     * @param mixed $lastname
-     */
-    public function setLastname($lastname): void
-    {
-        $this->lastname = $lastname;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email): void
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    /**
-     * @param mixed $password
-     */
-    public function setPassword($password): void
+    public function setPassword(string $password): void
     {
         $this->password = $password;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCreateDate()
+    public function getPlainPassword(): ?string
     {
-        return $this->create_date;
+        return $this->plainPassword;
     }
 
-    /**
-     * @param mixed $create_date
-     */
-    public function setCreateDate($create_date): void
+    public function setPlainPassword(string $plainPassword): void
     {
-        $this->create_date = $create_date;
+        $this->plainPassword = $plainPassword;
     }
 
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
 
+    public function setCity(City $city): void
+    {
+        $this->city = $city;
+    }
 }
