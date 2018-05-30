@@ -16,7 +16,7 @@ class mongoTest extends Controller
      */
     public function mongoTest()
     {
-        $this->test();
+        //$this->test();
         //$this->create();
         return new Response("ok.");
     }
@@ -25,25 +25,18 @@ class mongoTest extends Controller
     {
         $user = new User();
         $user->setUsername("Eugene");
-        $user->setPassword(md5("123456"));
-
-        $user2 = new User();
-        $user2->setUsername("Victoria");
-        $user2->setPassword(md5("123456"));
+        $user->setPassword(md5("password"));
 
         $city = new City();
-        $city->setIndex(1234567);
-        $city->setName("Minsk");
+        $city->setIndex(26850);
+        $city->setName("Минск");
 
         $user->setCityName($city->getName());
-        $user2->setCityName($city->getName());
 
         $city->addUser($user);
-        $city->addUser($user2);
 
         $dm = $this->get('doctrine_mongodb')->getManager();
         $dm->persist($user);
-        $dm->persist($user2);
         $dm->persist($city);
         $dm->flush();
     }

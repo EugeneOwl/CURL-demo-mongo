@@ -5,11 +5,11 @@ declare(strict_types = 1);
 namespace App\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ODM\Document(collection="users")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ODM\Id
@@ -26,15 +26,14 @@ class User
      */
     private $password;
 
-    /**
-     * @ODM\Field(type="string")
-     */
     private $plainPassword;
 
     /**
      * @ODM\Field(type="string")
      */
     private $cityName;
+
+    private $plainCityName;
 
     public function getId(): ?string
     {
@@ -84,5 +83,30 @@ class User
     public function setCityName(string $cityName): void
     {
         $this->cityName = $cityName;
+    }
+
+    public function getPlainCityName(): ?string
+    {
+        return $this->plainCityName;
+    }
+
+    public function setPlainCityName(string $plainCityName): void
+    {
+        $this->plainCityName = $plainCityName;
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getRoles()
+    {
+        return ["ROLE_USER"];
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
     }
 }
