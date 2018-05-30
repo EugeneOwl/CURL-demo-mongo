@@ -4,23 +4,24 @@ namespace App\Security\User;
 
 
 use App\Document\User;
+use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use App\Controller\mongoTest;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class WebserviceUserProvider implements UserProviderInterface
+class UserProvider implements UserProviderInterface
 {
     public function loadUserByUsername($username)
     {
-        $userData = new User("Eugene", '$2y$13$GshoJMu/9ovjaTxZnyWwDeQssVs4AzF8Nnxea1/dtqKAbPflmegYS', "Минск");
-        // pretend it returns an array on success, false if there is no user
-
+        $userData = "data";// Из БД я бы достал правильный хэщ пароля и внизу бы его передал
+        // TODO найти способ доставать репозиторием нужный экземпляр по логину
+        // и далее его пароль передавать сдесь же
         if ($userData) {
             $password = '$2y$13$GshoJMu/9ovjaTxZnyWwDeQssVs4AzF8Nnxea1/dtqKAbPflmegYS';
-
             $cityName = "Минск";
+            $username = "Eugene";
 
             return new User($username, $password, $cityName);
         }

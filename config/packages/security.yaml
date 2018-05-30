@@ -1,10 +1,10 @@
 security:
     encoders:
         App\Document\User:
-           algorithm: plaintext
+           algorithm: bcrypt
     providers:
         webservice:
-            id: App\Security\User\WebserviceUserProvider
+            id: App\Security\User\UserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
