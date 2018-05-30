@@ -1,12 +1,10 @@
 security:
     encoders:
-        App\Entity\User:
-           algorithm: bcrypt
+        App\Document\User:
+           algorithm: plaintext
     providers:
-        our_db_provider:
-            entity:
-                class: App\Document\User
-                property: username
+        webservice:
+            id: App\Security\User\WebserviceUserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

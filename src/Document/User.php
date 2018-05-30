@@ -11,6 +11,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+    public function __construct($username, $password, $cityName)
+    {
+        $this->username = $username;
+        $this->password = $password;
+        $this->cityName = $cityName;
+    }
+
     /**
      * @ODM\Id
      */

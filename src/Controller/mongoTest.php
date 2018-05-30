@@ -21,6 +21,12 @@ class mongoTest extends Controller
         return new Response("ok.");
     }
 
+    public function findUser(string $username): ?User
+    {
+        $dm = $this->get("doctrine_mongodb")->getManager();
+        return $dm->getRepository(User::class)->findOneBy(["username" => $username]);
+    }
+
     private function create(): void
     {
         $user = new User();
