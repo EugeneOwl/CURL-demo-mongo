@@ -27,6 +27,13 @@ class City
      */
     private $index;
 
+    /**
+     * @ODM\ReferenceMany(
+     *     targetDocument="User"
+     * )
+     */
+    private $users;
+
     public function getId()
     {
         return $this->id;
@@ -55,5 +62,15 @@ class City
     public function setIndex(string $index): void
     {
         $this->index = $index;
+    }
+
+    public function getUsers(): array
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): void
+    {
+        $this->users[] = $user;
     }
 }

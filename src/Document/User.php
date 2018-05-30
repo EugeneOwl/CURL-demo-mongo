@@ -32,11 +32,9 @@ class User
     private $plainPassword;
 
     /**
-     * @ODM\ReferenceOne(
-     *     targetDocument="City"
-     * )
+     * @ODM\Field(type="string")
      */
-    private $city;
+    private $cityName;
 
     public function getId(): ?string
     {
@@ -78,13 +76,13 @@ class User
         $this->plainPassword = $plainPassword;
     }
 
-    public function getCity(): ?City
+    public function getCityName(): ?string
     {
-        return $this->city;
+        return $this->cityName;
     }
 
-    public function setCity(City $city): void
+    public function setCityName(string $cityName): void
     {
-        $this->city = $city;
+        $this->cityName = $cityName;
     }
 }

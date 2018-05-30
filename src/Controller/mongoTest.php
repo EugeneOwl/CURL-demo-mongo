@@ -27,14 +27,23 @@ class mongoTest extends Controller
         $user->setUsername("Eugene");
         $user->setPassword(md5("123456"));
 
+        $user2 = new User();
+        $user2->setUsername("Victoria");
+        $user2->setPassword(md5("123456"));
+
         $city = new City();
         $city->setIndex(1234567);
-        $city->setName("Минск");
+        $city->setName("Minsk");
 
-        $user->setCity($city);
+        $user->setCityName($city->getName());
+        $user2->setCityName($city->getName());
+
+        $city->addUser($user);
+        $city->addUser($user2);
 
         $dm = $this->get('doctrine_mongodb')->getManager();
         $dm->persist($user);
+        $dm->persist($user2);
         $dm->persist($city);
         $dm->flush();
     }
@@ -42,9 +51,9 @@ class mongoTest extends Controller
     private function test(): void
     {
         $doctrineManager = $this->get("doctrine_mongodb")->getManager();
-        $neededCity = $doctrineManager->getRepository(City::class)->findOneBy(["name" => "Минск"]);
-        $neededUser = $doctrineManager->getRepository(User::class)->findOneBy(["city" => $neededCity]);
-        var_dump($neededCity);
-        var_dump($neededUser);
+        $neededCity = $doctrineManager->getRepository(City::class)->findOneBy(["name" => "Minsk"]);
+        $neededUsers = $doctrineManager->getRepository(User::class)->findBy(["cityName" => $neededCity->getName()]);
+        //var_dump($neededCity);
+        var_dump($neededUsers);
     }
 }
