@@ -14,10 +14,8 @@ class mongoTest extends Controller
     /**
      * @Route("/mongoTest")
      */
-    public function mongoTest()
+    public function mongoTest(): Response
     {
-        //$this->test();
-        //$this->create();
         return new Response("ok.");
     }
 
