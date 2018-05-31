@@ -8,7 +8,10 @@ namespace App\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /**
- * @ODM\Document(collection="cities")
+ * @ODM\Document(
+ *     collection="cities",
+ *     repositoryClass="App\Repository\CityRepository"
+ * )
  */
 class City
 {

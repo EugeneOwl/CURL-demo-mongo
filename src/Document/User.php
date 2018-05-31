@@ -6,8 +6,13 @@ namespace App\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
- * @ODM\Document(collection="users")
+ * @ODM\Document(
+ *     repositoryClass="App\Repository\UserRepository",
+ *     collection="users"
+ * )
  */
 class User implements UserInterface
 {
@@ -18,6 +23,7 @@ class User implements UserInterface
 
     /**
      * @ODM\Field(type="string")
+     * @Assert\NotBlank()
      */
     private $username;
 
@@ -26,14 +32,15 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @Assert\NotBlank()
+     */
     private $plainPassword;
 
     /**
      * @ODM\Field(type="string")
      */
     private $cityName;
-
-    private $plainCityName;
 
     public function getId(): ?string
     {
@@ -84,17 +91,6 @@ class User implements UserInterface
     {
         $this->cityName = $cityName;
     }
-
-    public function getPlainCityName(): ?string
-    {
-        return $this->plainCityName;
-    }
-
-    public function setPlainCityName(string $plainCityName): void
-    {
-        $this->plainCityName = $plainCityName;
-    }
-
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.

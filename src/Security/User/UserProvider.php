@@ -4,12 +4,13 @@ namespace App\Security\User;
 
 
 use App\Document\User;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
-class UserProvider implements UserProviderInterface
+class UserProvider extends Controller implements UserProviderInterface
 {
     private function getUserByUsername($username)
     {
@@ -17,6 +18,7 @@ class UserProvider implements UserProviderInterface
         $user->setPassword('$2y$13$GshoJMu/9ovjaTxZnyWwDeQssVs4AzF8Nnxea1/dtqKAbPflmegYS');
         $user->setCityName("Миснк");
         $user->setUsername($username);
+        //$this->get("doctrine_mongodb")->getManager;
         return $user;
     }
 
