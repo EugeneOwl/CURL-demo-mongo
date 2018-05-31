@@ -18,7 +18,8 @@ class UserProvider extends Controller implements UserProviderInterface
         $user->setPassword('$2y$13$GshoJMu/9ovjaTxZnyWwDeQssVs4AzF8Nnxea1/dtqKAbPflmegYS');
         $user->setCityName("Миснк");
         $user->setUsername($username);
-        //$this->get("doctrine_mongodb")->getManager;
+        $me = new UserProvider();
+        $me->get('doctrine_mongodb.odm.default_connection')->getManager;
         return $user;
     }
 
