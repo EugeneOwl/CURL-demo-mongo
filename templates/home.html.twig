@@ -4,4 +4,21 @@
     <p>
         <a href="{{ path('app_logout') }}">logout</a>
     </p>
+    {{ form_start(searchForm) }}
+    {{ form_row(searchForm.name) }}
+    {{ form_end(searchForm) }}
+
+    {{ city_message }}
+
+    <ol>
+        {% for user in userList %}
+            <li>
+                {{ user.username }}
+            </li>
+        {% endfor %}
+    </ol>
+
+    {% if userList is empty %}
+        <p>(empty set)</p>
+    {% endif %}
 {% endblock %}

@@ -67,7 +67,7 @@ class City
         $this->index = $index;
     }
 
-    public function getUsers(): array
+    public function getUsers()
     {
         return $this->users;
     }

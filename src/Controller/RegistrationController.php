@@ -36,9 +36,15 @@ class RegistrationController extends Controller
             $isUsernameFree = $userRepo->isUsernameFree($user->getUsername()) &&
             $doesCityExist = $cityRepo->doesCityExist($user->getCityName())
         ) {
+            $city = $cityRepo->findOneBy(["name" => $user->getCityName()]);
+            $city->addUser($user);
+
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
+
             $doctrineManager = $this->get("doctrine_mongodb")->getManager();
+
+            $doctrineManager->persist($city);
             $doctrineManager->persist($user);
             $doctrineManager->flush();
             return $this->redirectToRoute("app_home");
