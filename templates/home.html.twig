@@ -17,4 +17,8 @@
             </li>
         {% endfor %}
     </ol>
+
+    {% if userList is empty %}
+        <p>(empty set)</p>
+    {% endif %}
 {% endblock %}
